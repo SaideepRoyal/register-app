@@ -17,6 +17,12 @@ pipeline {
                 git branch: 'main', credentialsId: 'github', url: 'https://github.com/SaideepRoyal/register-app'
             }
         }
+        
+        stage('Verify Checkout') {
+             steps {
+                 sh 'ls -la'
+            }
+        }
 
         stage("Build Application") {
             steps {

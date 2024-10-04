@@ -18,15 +18,9 @@ pipeline {
             }
         }
         
-        stage('Verify Checkout') {
+         stage("Build Application") {
              steps {
-                 sh 'ls -la'
-            }
-        }
-
-        stage("Build Application") {
-            steps {
-                sh "mvn clean package"
+                sh "mvn -f path/to/pom.xml clean package"
             }
         }
         stage("Test Application") {

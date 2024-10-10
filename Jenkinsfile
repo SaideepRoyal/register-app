@@ -12,7 +12,6 @@ pipeline {
         DOCKER_PASS = 'dockerhub'
         IMAGE_NAME = "${DOCKER_USER}/${APP_NAME}"
         IMAGE_TAG = "${RELEASE}-${BUILD_NUMBER}"
-        DOCKER_BUILDKIT = '0'  // Enable BuildKit
     }
     stages {
         stage("Cleanup Workspace") {
@@ -58,10 +57,10 @@ pipeline {
         stage("Build & Push Docker Image") {
             steps {
                 script {
-                    docker.withRegistry('',dockerhub-credentials-id) {
+                    docker.withRegistry('',DOCKER_PASS) {
                         docker_image = docker.build "${IMAGE_NAME}"
                     }
-                     docker.withRegistry('',dockerhub-credentials-id) {
+                     docker.withRegistry('',DOCKER_PASS) {
                         docker_image.push("${IMAGE_TAG}")
                          docker_image.push('latest')
                      }

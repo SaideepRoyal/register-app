@@ -12,7 +12,7 @@ pipeline {
         DOCKER_PASS = 'dockerhub'
         IMAGE_NAME = "${DOCKER_USER}/${APP_NAME}"
         IMAGE_TAG = "${RELEASE}-${BUILD_NUMBER}"
-        DOCKER_BUILDKIT = '1'  // Enable BuildKit
+        DOCKER_BUILDKIT = '0'  // Enable BuildKit
     }
     stages {
         stage("Cleanup Workspace") {

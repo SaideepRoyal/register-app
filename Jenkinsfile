@@ -59,6 +59,14 @@ pipeline {
                 script {
                     docker.withRegistry('',DOCKER_PASS) {
                         docker_image = docker.build("${IMAGE_NAME}")
+                         // Install buildx if necessary
+                          sh 'docker buildx install || true'
+                    
+                         // Create a new builder instance
+                          sh 'docker buildx create --use || true'
+
+                         // Build the Docker image using Buildx
+                          sh 'docker buildx build --platform linux/amd64,linux/arm64 -t my-image:latest --push .'
 
                     }
                      docker.withRegistry('',DOCKER_PASS) {
